@@ -15,7 +15,6 @@ const fetchProducts = (key) => {
 // } catch (error) {
 //     return error.message;
 //   }
-
 };
 // console.log(fetchProducts());
 
