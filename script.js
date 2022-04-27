@@ -40,7 +40,7 @@ function createCartItemElement({ sku, name, salePrice }) {
   return li;
 }
 
-const getArray = async () => {
+const getArrayProduct = async () => {
     const arrayProduct = await fetchProducts('computador');
     const items = document.querySelector('.items');
     arrayProduct.forEach((element) => {
@@ -49,6 +49,6 @@ const getArray = async () => {
       items.appendChild(createProductItemElement({ sku: id, name: title, image: thumbnail }));
     });
 };
-// console.log(getArray());
+// console.log(getArrayProduct());
 
-  window.onload = () => getArray();
+  window.onload = () => getArrayProduct();
