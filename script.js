@@ -53,6 +53,20 @@ function createProductItemElement({ sku, name, image }) {
 //   return item.querySelector('span.item__sku').innerText;
 // }
 
+const createLoading = () => {
+const container = document.querySelector('.container');
+const span = document.createElement('span');
+span.className = 'loading';
+span.innerHTML = 'carregando...';
+container.appendChild(span);
+};
+// createLoading();
+
+const cleanLoading = () => {
+  const span = document.querySelector('.loading');
+  span.remove();
+};
+
 const getArrayProduct = async (product) => {
   const arrayProduct = await fetchProducts(product);
   const items = document.querySelector('.items');
@@ -60,6 +74,7 @@ const getArrayProduct = async (product) => {
     const { id, title, thumbnail } = element;
     items.appendChild(createProductItemElement({ sku: id, name: title, image: thumbnail }));
   });
+  cleanLoading();
 };
 // console.log(getArrayProduct());
 
@@ -79,6 +94,7 @@ const getItems = () => {
 };
 
 window.onload = () => {
+  createLoading();
   getArrayProduct('computador');
   getItems();
 };
