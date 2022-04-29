@@ -1,3 +1,5 @@
+const olCartItems = document.querySelector('.cart__items');
+
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -14,6 +16,7 @@ function createCustomElement(element, className, innerText) {
 
 function cartItemClickListener(event) {
   event.target.remove();
+  saveCartItems(olCartItems.innerHTML);
 }
 
 function createCartItemElement({ id: sku, title: name, price: salePrice }) {
@@ -27,9 +30,9 @@ function createCartItemElement({ id: sku, title: name, price: salePrice }) {
 const getIdProduct = async (event) => {
   const idProduct = await fetchItem(event.target.parentNode.firstChild.innerText);
   const { id, title, price } = idProduct;
-  const cartItems = document.querySelector('.cart__items');
-  const produto = cartItems.appendChild(createCartItemElement({ id, title, price }));
-  saveCartItems(produto);
+  // const olCartItems = document.querySelector('.cart__items');
+  olCartItems.appendChild(createCartItemElement({ id, title, price }));
+  saveCartItems(olCartItems.innerHTML);
 };
 // getIdProduct('MLB1341706310');
 
@@ -41,7 +44,7 @@ function createProductItemElement({ sku, name, image }) {
   section.appendChild(createCustomElement('span', 'item__title', name));
   section.appendChild(createProductImageElement(image));
   section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!'))
-  .addEventListener('click', getIdProduct);
+    .addEventListener('click', getIdProduct);
 
   return section;
 }
@@ -61,11 +64,21 @@ const getArrayProduct = async (product) => {
 // console.log(getArrayProduct());
 
 const clearCart = () => {
-  const ol = document.querySelector('.cart__items');
-  ol.innerHTML = '';
+  // const ol = document.querySelector('.cart__items');
+  olCartItems.innerHTML = '';
+  localStorage.removeItem('cartItems');
 };
 
 const clear = document.querySelector('.empty-cart');
 clear.addEventListener('click', clearCart);
 
-window.onload = () => getArrayProduct('computador');
+const getItems = () => {
+  const teste = getSavedCartItems('cartItems');
+  olCartItems.innerHTML = teste;
+  olCartItems.addEventListener('click', cartItemClickListener);
+};
+
+window.onload = () => {
+  getArrayProduct('computador');
+  getItems();
+};
