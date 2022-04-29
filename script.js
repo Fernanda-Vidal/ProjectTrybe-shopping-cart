@@ -73,7 +73,7 @@ const clear = document.querySelector('.empty-cart');
 clear.addEventListener('click', clearCart);
 
 const getItems = () => {
-  const teste = getSavedCartItems('cartItems');
+  const teste = getSavedCartItems();
   olCartItems.innerHTML = teste;
   olCartItems.addEventListener('click', cartItemClickListener);
 };
