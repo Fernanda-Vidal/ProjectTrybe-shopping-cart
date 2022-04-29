@@ -1,4 +1,3 @@
-// const { fetchItem } = require("./helpers/fetchItem");
 
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
@@ -15,7 +14,7 @@ function createCustomElement(element, className, innerText) {
 }
 
 function cartItemClickListener(event) {
-  event.target.remove();
+  const productRemove = event.target.remove();
 }
 
 function createCartItemElement({ id: sku, title: name, price: salePrice }) {
@@ -29,9 +28,9 @@ function createCartItemElement({ id: sku, title: name, price: salePrice }) {
 const getIdProduct = async (event) => {
   const idProduct = await fetchItem(event.target.parentNode.firstChild.innerText);
   const { id, title, price } = idProduct;
-  const func = createCartItemElement({ id, title, price });
   const cartItems = document.querySelector('.cart__items');
-  cartItems.appendChild(func);
+  const produto = cartItems.appendChild(createCartItemElement({ id, title, price }));
+  saveCartItems(produto);
 };
 // getIdProduct('MLB1341706310');
 
@@ -62,4 +61,12 @@ const getArrayProduct = async (product) => {
 };
 // console.log(getArrayProduct());
 
-  window.onload = () => getArrayProduct('computador');
+const clearCart = () => {
+  const ol = document.querySelector('.cart__items');
+  ol.innerHTML = '';
+};
+
+const clear = document.querySelector('.empty-cart');
+clear.addEventListener('click', clearCart);
+
+window.onload = () => getArrayProduct('computador');
