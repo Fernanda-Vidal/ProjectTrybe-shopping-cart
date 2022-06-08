@@ -1,8 +1,8 @@
-### Termos de acordos
-
-Ao iniciar este projeto, você concorda com as diretrizes do Código de Ética e Conduta e do Manual da Pessoa Estudante da Trybe.
-
 # Projeto de Carrinho de Compras! 🚀
+
+Projeto realizado no curso de Desenvolvimento Web da Trybe. Toda a estrutura do projeto foi fornecida pela Trybe.
+
+Requisitos realizados nos arquivos fetchItem.js, fetchProducts.js, getSavedCartItems.js, saveCartItems e script.js.
 
 ### Entregáveis:
 
